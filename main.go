@@ -37,11 +37,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	for _, event := range events {
+		res, err := bot.GetProfile(event.Source.UserID).Do()
+		if err != nil {
+			log.Fatal(err)
+		}
 		//訊息事件
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("User ID:"+event.Source.UserID+":"+message.Text)).Do()
+				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("User ID:"+event.Source.UserID+"名:"+res.DisplayName+":"+message.Text)).Do()
 			}
 		}
 		fmt.Println("event:", event)
