@@ -44,6 +44,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("reply token:"+event.ReplyToken+"ID:"+message.ID+":"+message.Text)).Do()
 			}
 		}
+		fmt.Println(123)
 		fmt.Println("port:", os.Getenv("PORT"))
 		fmt.Println("event:", event)
 	}
