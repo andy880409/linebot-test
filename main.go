@@ -41,7 +41,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("reply token:"+event.ReplyToken+"ID:"+message.ID+":"+message.Text)).Do()
+				bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("User ID:"+event.Source.UserID+":"+message.Text)).Do()
 			}
 		}
 		fmt.Println("event:", event)
